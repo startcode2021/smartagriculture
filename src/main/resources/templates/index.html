@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>智慧农业管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"  href="css/bootstrap.min.css" />
+    <link rel="stylesheet"  href="css/bootstrap-theme.min.css" />
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="js/jquery-3.5.1.min.js" type="application/javascript"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">农田检测平台</span>
+            </button>
+            <a class="navbar-brand" href="#">农田检测平台</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active"><a href="">数据中心</a></li>
+                <li ><a href="">智能控制</a></li>
+                <li ><a href="">视频监控</a></li>
+                <li ><a href="">病虫害防控</a></li>
+                <li ><a href="">专家问诊</a></li>
+                <li ><a href="">后台管理</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/toLogin}">登录</a></li>
+                <li><a th:href="@{/register}">注册</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

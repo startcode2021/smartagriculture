@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户注册页面</title>
+    <link rel="stylesheet"  href="/css/bootstrap.min.css" />
+    <link rel="stylesheet"  href="/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet"  href="/css/register.css"/>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/jquery-3.5.1.min.js" type="application/javascript"></script>
+    <script type="text/javascript" src="/js/kaptcha.js"></script>
+    <script type="text/javascript" src="/js/validate.js"></script>
+    <script type="text/javascript" src="/js/register.js"></script>
+</head>
+<body>
+<!-- begin:添加一个注册表单 -->
+<div id="login-box">
+    <form id="insert_modal" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label white">手机号:</label>
+            <div class="col-sm-7">
+            <input type="text" class="form-control" id="insert_phone"
+                   name="phone" placeholder="请输入手机号"/> <span
+                class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label white">邮箱:</label>
+            <div class="col-sm-7">
+            <input type="email" class="form-control" id="insert_email"
+                   name="email" placeholder="请输入邮箱"/> <span
+                class="help-block"></span>
+             </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label white">昵称:</label>
+            <div class="col-sm-7">
+            <input type="text" class="form-control" id="insert_name"
+                   name="name" placeholder="请输入昵称"/> <span
+                class="help-block"></span>
+             </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label white">密码:</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="insert_password"
+                   name="password" placeholder="请输入密码"/> <span
+                class="help-block"></span>
+            </div>
+        </div>
+        <!-- begin:验证码 -->
+        <div class="form-group">
+            <label class="col-sm-3 control-label white">验证码:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="kaptcha" name="kaptcha"
+                   placeholder="请输入验证码" style="color: #000000;" /><span
+                class="help-block"></span>
+        </div>
+            <img class="col-sm-4" src="kaptcha.jpg" width="180" height="40" id="kaptchaImage" title="看不清，点击换一张" />
+        </div>
+            <button type="button" id="user_insert_btn">注册</button>
+            <div>
+                <!-- begin:登录功能 -->
+                <p></p><p><a id="black" th:href="@{/toLogin} ">已有账户,点击前往登录吧！</a></p>
+            </div>
+        </div>
+        <!-- end:验证码 -->
+    </form>
+</div>
+</body>
+</html>

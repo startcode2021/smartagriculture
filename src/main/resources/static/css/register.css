@@ -1,0 +1,58 @@
+body {
+    background: url('../images/24hr-Earth_11.jpeg') no-repeat;
+    background-size: 100% auto;
+}
+#login-box {
+    width: 35%;
+    height: auto;
+    margin: 15% auto 0;
+    text-align: center;
+    background: #00000090;
+    padding: 20px 50px;
+}
+.greybackground{
+    background:#00000090;
+}
+#black {
+    color:#FFFFFF;
+}
+.white{
+    color:#FFFFFF;
+}
+#login-box h1 {
+    color: #fff;
+}
+
+#login-box .form .item {
+    margin-top: 15px;
+}
+
+#login-box .form .item i {
+    font-size: 18px;
+    color: #fff;
+}
+
+#login-box .form .item input {
+    width: 180px;
+    font-size: 18px;
+    border: 0;
+    border-bottom: 2px solid #fff;
+    padding: 5px 10px;
+    background: #ffffff00;
+    color: #fff;
+}
+
+#login-box button {
+    margin-top: 15px;
+    width: 180px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+    border: 0;
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%);
+}
+#login-box button:hover{
+    color:#fff;
+}
