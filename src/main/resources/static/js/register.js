@@ -30,20 +30,12 @@ $(function(){
                         //但是在templates下必须经过请求否则就会暴露页面不安全
                         alert("---注册成功---");
                         //跳转到登录页面
-                        /*window.location.href = "signin";*/
+                        window.location.href = "tologin";
                     }else{
                         alert("---注册失败---");
                         //显示失败信息
                         //有哪个字段错误,就显示哪个字段
-                        if(undefined!=msg.map.map.username){
-                            //显示账号错误信息
-                            show_validate_msg("#insert_name","error",msg.map.map.username);
-                        }
-                        if(undefined!=msg.map.map.password){
-                            show_validate_msg("#insert_password","error",msg.map.map.password);
-                        }
                     }
-
                 },
                 error:function(){
                 }

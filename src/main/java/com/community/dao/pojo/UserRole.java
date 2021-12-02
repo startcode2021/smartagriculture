@@ -7,34 +7,32 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("user")
-@ApiModel(value="User对象", description="")
-public class User {
+@TableName("user_role")
+@ApiModel(value="UserRole对象", description="")
+public class UserRole implements Serializable {
 
-    @ApiModelProperty(value = "自增id")
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "角色编号")
     @TableId(value = "id", type = IdType.AUTO)
     private int id;
 
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(value = "角色名称")
     private String name;
 
-    @ApiModelProperty(value = "密码")
-    private String password;
+    @ApiModelProperty(value = "角色描述")
+    private String description;
 
-    @ApiModelProperty(value = "邮箱")
-    private String email;
+    @ApiModelProperty(value = "创建时间")
+    private Date gmtCreate;
 
-    @ApiModelProperty(value = "手机号")
-    private String phone;
 
-    @ApiModelProperty(value = "角色编号")
-    private int roleid;
 }

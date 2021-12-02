@@ -22,11 +22,13 @@ public class JWTUtils {
      */
     public static String geneJsonWebToken(User user){
 
-        if(user == null ){
+        if(user == null || user.getPhone() == null || user.getPassword() == null){
             return null;
         }
         String token = Jwts.builder().setSubject(SUBJECT)
                 .claim("id",user.getId())
+                .claim("phone",user.getPhone())
+                .claim("password",user.getPassword())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis()+EXPIRE))
                 .signWith(SignatureAlgorithm.HS256,APPSECRET).compact();
@@ -49,6 +51,6 @@ public class JWTUtils {
 
         }catch (Exception e){ }
         return null;
-
     }
+
 }

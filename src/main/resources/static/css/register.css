@@ -1,20 +1,21 @@
 body {
-    background: url('../images/darkness.png') no-repeat;
+    background: url('../images/blue.jpg') repeat;
     background-size: 100% auto;
 }
 #login-box {
     width: 35%;
     height: auto;
-    margin: 15% auto 0;
+    margin: 10% auto 0;
     text-align: center;
-    background: #00000090;
+    background-color: rgba(245,245,245,0.5);
+    border-radius: 25px;
     padding: 20px 50px;
 }
 .greybackground{
     background:#00000090;
 }
 #black {
-    color:#FFFFFF;
+    color:#000000;
 }
 .white{
     color:#FFFFFF;
