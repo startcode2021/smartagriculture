@@ -1,0 +1,8 @@
+#list-box{
+    width: 70%;
+    height: auto;
+    margin: 0% auto 0;
+    background-color: rgba(245,245,245,0.5);
+    border-radius: 25px;
+    padding: 20px 50px;
+}

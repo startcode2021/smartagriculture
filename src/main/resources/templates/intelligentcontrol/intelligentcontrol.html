@@ -5,20 +5,37 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet"  href="css/bootstrap.min.css" />
     <link rel="stylesheet"  href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet"  href="/css/intelligent.css"/>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
     <script src="js/jquery-3.5.1.min.js" type="application/javascript"></script>
     <script src="js/intelligentcontrol.js" type="application/javascript"></script>
 </head>
 <body>
 <div class="row" th:insert="~{/navigation/navigation :: navigation}"></div>
-<table class="table table-hover">
+<div id="list-box">
+<table  class="table table-hover">
     <!-- On cells (`td` or `th`) -->
+    <th>序号</th>
+    <th>设备序列号</th>
+    <th>设备名称</th>
+    <th>设备类型</th>
+    <th>安装区域</th>
+    <th>设备数量</th>
+    <th>添加日期</th>
+    <th>备注</th>
     <tr>
         <td class="active"></td>
-    </tr>
-    <tr>
-
+        <td class="active"></td>
+        <td class="active"></td>
+        <td class="active"></td>
+        <td class="active"></td>
+        <td class="active"></td>
+        <td class="active"></td>
+        <td class="active"></td>
     </tr>
 </table>
+    <button type="button" class="btn btn-success">添加设备</button>
+    <button type="button" class="btn btn-danger">删除设备</button>
+</div>
 </body>
 </html>
