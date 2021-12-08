@@ -18,5 +18,14 @@ public class Place {
     private int id;
 
     @ApiModelProperty(value = "地点名称")
-    private int place_name;
+    private String place_name;
+
+    @ApiModelProperty(value = "GPS名称")
+    private String gps_name;
+
+    @ApiModelProperty(value = "经度")
+    private String lon;
+
+    @ApiModelProperty(value = "纬度")
+    private String lat;
 }

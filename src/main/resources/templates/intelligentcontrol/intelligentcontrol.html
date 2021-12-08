@@ -6,13 +6,29 @@
     <link rel="stylesheet"  href="/css/bootstrap.min.css" />
     <link rel="stylesheet"  href="/css/bootstrap-theme.min.css" />
     <link rel="stylesheet"  href="/css/intelligent.css"/>
-    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/jquery-3.5.1.min.js" type="application/javascript"></script>
-    <script src="/js/intelligentcontrol.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
 </head>
 <body>
 <div class="row" th:insert="~{/navigation/navigation :: navigation}"></div>
+<script>
+    $(function (){
+        $('#li2').addClass("active");
+    });
+</script>
 <div id="list-box">
+    <!-- Single button -->
+    <div class="btn-group" style="margin-bottom: 10px">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            安装区域 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu"  >
+            <li><a href="/intelligent/1/5/0">全部</a></li>
+            <th:block th:each="Place:${PlaceList}">
+                <li><a th:href="@{'/intelligent/1/5/'+${Place.getPlace_name()}}" th:text="${Place.getPlace_name()}"></a></li>
+            </th:block>
+        </ul>
+    </div>
 <table  class="table table-hover">
     <!-- On cells (`td` or `th`) -->
     <th>序号</th>
@@ -40,19 +56,19 @@
     <nav aria-label="Page navigation" class="navbar-right" >
         <ul class="pagination" style="margin-top: 0">
             <li class="page-item">
-                <a th:class="${pageParam.hasPrevious()==true?'btn page-link':'btn page-link disabled'}" th:href="@{'/intelligent/'+${pageParam.getCurrent()-1}+'/5'}" tabindex=""><span aria-hidden="true">&laquo;</span></a>
+                <a th:class="${pageParam.hasPrevious()==true?'btn page-link':'btn page-link disabled'}" th:href="@{'/intelligent/'+${pageParam.getCurrent()-1}+'/5/'+${CurrentPlace}}" tabindex=""><span aria-hidden="true">&laquo;</span></a>
             </li>
             <li class="page-item" th:if="${pageParam.hasPrevious()}">
-                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()-1}+'/5'}" th:text="${pageParam.getCurrent()-1}"></a>
+                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()-1}+'/5/'+${CurrentPlace}}" th:text="${pageParam.getCurrent()-1}"></a>
             </li>
             <li class="page-item active">
-                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()}+'/5'}" th:text="${pageParam.getCurrent()}"></a>
+                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()}+'/5/'+${CurrentPlace}}" th:text="${pageParam.getCurrent()}"></a>
             </li>
             <li class="page-item" th:if="${pageParam.hasNext()}">
-                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()+1}+'/5'}" th:text="${pageParam.getCurrent()+1}"></a>
+                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()+1}+'/5/'+${CurrentPlace}}" th:text="${pageParam.getCurrent()+1}"></a>
             </li>
             <li class="page-item">
-                <a th:class="${pageParam.hasNext()==true?'btn page-link':'btn page-link disabled'}"  th:href="@{'/intelligent/'+${pageParam.getCurrent()+1}+'/5'}" ><span aria-hidden="true">&raquo;</span></a>
+                <a th:class="${pageParam.hasNext()==true?'btn page-link':'btn page-link disabled'}"  th:href="@{'/intelligent/'+${pageParam.getCurrent()+1}+'/5/'+${CurrentPlace}}" ><span aria-hidden="true">&raquo;</span></a>
             </li>
         </ul>
     </nav>
@@ -78,12 +94,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label  class="col-sm-3 control-label">安装区域</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="robot_address" name="robot_address" placeholder="安装区域">
-        </div>
-    </div>
-    <div class="form-group">
         <label  class="col-sm-3 control-label">设备数量</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" id="robot_num" name="robot_num" placeholder="设备数量">
@@ -96,12 +106,20 @@
         </div>
     </div>
     <div class="form-group">
+        <label  class="col-sm-3 control-label">安装区域</label>
+        <select class="form-control-static col-sm-6" name="robot_address">
+            <th:block th:each="Place:${PlaceList}">
+                <option  th:text="${Place.getPlace_name()}" th:value="${Place.getPlace_name()}"></option>
+            </th:block>
+        </select>
+    </div>
+    <div class="form-group">
         <div class="col-sm-offset-3 col-sm-10">
             <button type="submit" class="btn btn-default">添加设备</button>
         </div>
     </div>
 </form>
-<form th:action="@{/DeleteRobotType}" method="post" id="light2"  class="form-horizontal white_content2" style="overflow-x:hidden">
+<form th:action="@{'/DeleteRobotType/'+${CurrentPlace}}" method="post" id="light2"  class="form-horizontal white_content2" style="overflow-x:hidden">
     <button type="button" class="btn btn-danger col-sm-offset-11 col-sm-1" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
     <div class="form-group">
         <label  class="col-sm-3 control-label">序号</label>

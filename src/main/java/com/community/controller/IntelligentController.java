@@ -2,7 +2,9 @@ package com.community.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.community.dao.pojo.Place;
 import com.community.dao.pojo.RobotType;
+import com.community.service.PlaceService;
 import com.community.service.RobotTypeService;
 import com.community.vo.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +29,26 @@ public class IntelligentController {
     @Autowired
     RobotTypeService robotTypeService;
 
-    @GetMapping("/intelligent/{page}/{limit}")
-    public String intelligent(@PathVariable int page, @PathVariable int limit, Model model){
+    @Autowired
+    PlaceService placeService;
+
+    @GetMapping("/intelligent/{page}/{limit}/{place}")
+    public String intelligent(@PathVariable int page, @PathVariable int limit, @PathVariable String place,Model model){
         if (page < 1){
             page = 1;
         }
         Page<RobotType> pageParam = new Page<>(page, limit);
-        robotTypeService.page(pageParam,new QueryWrapper<RobotType>().orderByDesc("add_date"));
+        if(place.equals("0")){
+            robotTypeService.page(pageParam, new QueryWrapper<RobotType>().orderByDesc("id"));
+        }else {
+            robotTypeService.page(pageParam, new QueryWrapper<RobotType>().orderByDesc("id").eq("robot_address", place));
+        }
         List<RobotType> RobotTypeList = pageParam.getRecords();
+        List<Place> placeList = placeService.list();
+        model.addAttribute("PlaceList",placeList);
         model.addAttribute("RobotTypeList",RobotTypeList);
         model.addAttribute("pageParam",pageParam);
+        model.addAttribute("CurrentPlace",place);
         return "intelligentcontrol/intelligentcontrol";
     }
 
@@ -53,16 +65,21 @@ public class IntelligentController {
         robotType.setAdd_date(date);
         boolean flag = robotTypeService.save(robotType);
         if (flag){
-            return "redirect:/intelligent/1/5";
+            return "redirect:/intelligent/1/5/0";
         }else
         {
-            return "redirect:/intelligent/1/5";
+            return "redirect:/intelligent/1/5/0";
         }
     }
-    @PostMapping("/DeleteRobotType")
-    public void DeleteRobotType(String id, HttpServletResponse response) throws IOException {
+    @PostMapping("/DeleteRobotType/{place}")
+    public void DeleteRobotType(String id, @PathVariable String place, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
-        List<RobotType> RobotTypeList = robotTypeService.list(new QueryWrapper<RobotType>().orderByDesc("add_date"));
+        List<RobotType> RobotTypeList;
+        if(place.equals("0")) {
+            RobotTypeList= robotTypeService.list(new QueryWrapper<RobotType>().orderByDesc("id"));
+        }else{
+            RobotTypeList = robotTypeService.list(new QueryWrapper<RobotType>().orderByDesc("id").eq("robot_address",place));
+        }
         if(RobotTypeList.size()<Integer.parseInt(id))
         {
             PrintWriter writer = response.getWriter();
@@ -77,7 +94,7 @@ public class IntelligentController {
             if (flag) {
                 PrintWriter writer = response.getWriter();
                 String msg = null;
-                msg = "alert('删除成功');location.href='/intelligent/1/5'";;
+                msg = "alert('删除成功');location.href='/intelligent/1/5/"+place+"'";
                 writer.print("<script type='text/javascript'>" + msg + "</script>");
                 writer.flush();
                 writer.close();

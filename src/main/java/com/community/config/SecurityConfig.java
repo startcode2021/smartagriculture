@@ -36,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**","/css/**","/images/*","/fonts/**","/**/*.png","/**/*.jpg").permitAll()
                 .antMatchers("/*").authenticated()
                 .antMatchers("/*/*").authenticated()
-                .antMatchers("/*/*/*").authenticated();
+                .antMatchers("/*/*/*").authenticated()
+                .antMatchers("/*/*/*/*").authenticated();
 
         // 登录配置
         http.formLogin()

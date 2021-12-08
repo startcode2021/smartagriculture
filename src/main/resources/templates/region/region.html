@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>智慧农业管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"  href="/css/bootstrap.min.css" />
+    <link rel="stylesheet"  href="/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet"  href="/css/intelligent.css"/>
+    <script src="/js/jquery-3.5.1.min.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+</head>
+<body>
+<div class="row" th:insert="~{/navigation/navigation :: navigation}"></div>
+<script>
+    $(function (){
+        $('#li6').addClass("active");
+    });
+</script>
+<div id="list-box">
+<table  class="table table-hover">
+    <!-- On cells (`td` or `th`) -->
+    <th>序号</th>
+    <th>地点名</th>
+    <th>GPS名称</th>
+    <th>经度</th>
+    <th>纬度</th>
+    <tr th:each="Place:${PlaceList}">
+        <td  th:text="${PlaceList.indexOf(Place)+1+5*(pageParam.getCurrent()-1)}"></td>
+        <td  th:text="${Place.getPlace_name()}"></td>
+        <td  th:text="${Place.getGps_name()}"></td>
+        <td  th:text="${Place.getLon()}"></td>
+        <td  th:text="${Place.getLat()}"></td>
+    </tr>
+</table>
+    <button type="button" class="btn btn-success" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">添加地域</button>
+    <button type="button" class="btn btn-danger"  onclick = "document.getElementById('light2').style.display='block';document.getElementById('fade').style.display='block'">删除地域</button>
+    <!--分页-->
+    <nav aria-label="Page navigation" class="navbar-right" >
+        <ul class="pagination" style="margin-top: 0">
+            <li class="page-item">
+                <a th:class="${pageParam.hasPrevious()==true?'btn page-link':'btn page-link disabled'}" th:href="@{'/region/'+${pageParam.getCurrent()-1}+'/5'}" tabindex=""><span aria-hidden="true">&laquo;</span></a>
+            </li>
+            <li class="page-item" th:if="${pageParam.hasPrevious()}">
+                <a class="page-link" th:href="@{'/region/'+${pageParam.getCurrent()-1}+'/5'}" th:text="${pageParam.getCurrent()-1}"></a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" th:href="@{'/region/'+${pageParam.getCurrent()}+'/5'}" th:text="${pageParam.getCurrent()}"></a>
+            </li>
+            <li class="page-item" th:if="${pageParam.hasNext()}">
+                <a class="page-link" th:href="@{'/region/'+${pageParam.getCurrent()+1}+'/5'}" th:text="${pageParam.getCurrent()+1}"></a>
+            </li>
+            <li class="page-item">
+                <a th:class="${pageParam.hasNext()==true?'btn page-link':'btn page-link disabled'}"  th:href="@{'/region/'+${pageParam.getCurrent()+1}+'/5'}" ><span aria-hidden="true">&raquo;</span></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<form th:action="@{/AddPlace}" method="post" id="light"  class="form-horizontal white_content" style="overflow-x:hidden; height: 45%;">
+    <button type="button" class="btn btn-danger col-sm-offset-11 col-sm-1" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">地域名称</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="place_name" name="place_name"  placeholder="地域名称">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">GPS名称</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="gps_name" name="gps_name"  placeholder="GPS名称">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">经度</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="lon" name="lon"  placeholder="经度">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">纬度</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="lat" name="lat"  placeholder="纬度">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit" class="btn btn-default">添加地域</button>
+        </div>
+    </div>
+</form>
+<form th:action="@{/DeletePlace}" method="post" id="light2"  class="form-horizontal white_content2" style="overflow-x:hidden">
+    <button type="button" class="btn btn-danger col-sm-offset-11 col-sm-1" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">序号</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="id" name="id" placeholder="序号">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit" class="btn btn-default">删除地域</button>
+        </div>
+    </div>
+</form>
+<div id="fade" class="black_overlay">
+</div>
+</body>
+</html>
