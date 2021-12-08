@@ -3,12 +3,12 @@
 <head>
     <title>智慧农业管理系统</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet"  href="css/bootstrap.min.css" />
-    <link rel="stylesheet"  href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet"  href="/css/bootstrap.min.css" />
+    <link rel="stylesheet"  href="/css/bootstrap-theme.min.css" />
     <link rel="stylesheet"  href="/css/intelligent.css"/>
-    <script src="js/bootstrap.min.js" type="application/javascript"></script>
-    <script src="js/jquery-3.5.1.min.js" type="application/javascript"></script>
-    <script src="js/intelligentcontrol.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/jquery-3.5.1.min.js" type="application/javascript"></script>
+    <script src="/js/intelligentcontrol.js" type="application/javascript"></script>
 </head>
 <body>
 <div class="row" th:insert="~{/navigation/navigation :: navigation}"></div>
@@ -23,19 +23,100 @@
     <th>设备数量</th>
     <th>添加日期</th>
     <th>备注</th>
-    <tr>
-        <td class="active"></td>
-        <td class="active"></td>
-        <td class="active"></td>
-        <td class="active"></td>
-        <td class="active"></td>
-        <td class="active"></td>
-        <td class="active"></td>
-        <td class="active"></td>
+    <tr th:each="RobotyType:${RobotTypeList}">
+        <td  th:text="${RobotTypeList.indexOf(RobotyType)+1+5*(pageParam.getCurrent()-1)}"></td>
+        <td  th:text="${RobotyType.getIndex_num()}"></td>
+        <td  th:text="${RobotyType.getRobot_name()}"></td>
+        <td  th:text="${RobotyType.getRobot_type()}"></td>
+        <td  th:text="${RobotyType.getRobot_address()}"></td>
+        <td  th:text="${RobotyType.getRobot_num()}"></td>
+        <td  th:text="${#dates.format(RobotyType.getAdd_date(),'yyyy-MM-dd')}"></td>
+        <td  th:text="${RobotyType.getOther()}"></td>
     </tr>
 </table>
-    <button type="button" class="btn btn-success">添加设备</button>
-    <button type="button" class="btn btn-danger">删除设备</button>
+    <button type="button" class="btn btn-success" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">添加设备</button>
+    <button type="button" class="btn btn-danger"  onclick = "document.getElementById('light2').style.display='block';document.getElementById('fade').style.display='block'">删除设备</button>
+    <!--分页-->
+    <nav aria-label="Page navigation" class="navbar-right" >
+        <ul class="pagination" style="margin-top: 0">
+            <li class="page-item">
+                <a th:class="${pageParam.hasPrevious()==true?'btn page-link':'btn page-link disabled'}" th:href="@{'/intelligent/'+${pageParam.getCurrent()-1}+'/5'}" tabindex=""><span aria-hidden="true">&laquo;</span></a>
+            </li>
+            <li class="page-item" th:if="${pageParam.hasPrevious()}">
+                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()-1}+'/5'}" th:text="${pageParam.getCurrent()-1}"></a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()}+'/5'}" th:text="${pageParam.getCurrent()}"></a>
+            </li>
+            <li class="page-item" th:if="${pageParam.hasNext()}">
+                <a class="page-link" th:href="@{'/intelligent/'+${pageParam.getCurrent()+1}+'/5'}" th:text="${pageParam.getCurrent()+1}"></a>
+            </li>
+            <li class="page-item">
+                <a th:class="${pageParam.hasNext()==true?'btn page-link':'btn page-link disabled'}"  th:href="@{'/intelligent/'+${pageParam.getCurrent()+1}+'/5'}" ><span aria-hidden="true">&raquo;</span></a>
+            </li>
+        </ul>
+    </nav>
 </div>
+<form th:action="@{/AddRobotType}" method="post" id="light"  class="form-horizontal white_content" style="overflow-x:hidden">
+    <button type="button" class="btn btn-danger col-sm-offset-11 col-sm-1" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">设备序列号</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="index_num" name="index_num"  placeholder="设备序列号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">设备名称</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="robot_name" name="robot_name" placeholder="设备名称">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">设备类型</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="robot_type" name="robot_type" placeholder="设备类型">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">安装区域</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="robot_address" name="robot_address" placeholder="安装区域">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">设备数量</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="robot_num" name="robot_num" placeholder="设备数量">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">备注</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="other" name="other" placeholder="备注">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit" class="btn btn-default">添加设备</button>
+        </div>
+    </div>
+</form>
+<form th:action="@{/DeleteRobotType}" method="post" id="light2"  class="form-horizontal white_content2" style="overflow-x:hidden">
+    <button type="button" class="btn btn-danger col-sm-offset-11 col-sm-1" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">序号</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="id" name="id" placeholder="序号">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit" class="btn btn-default">删除设备</button>
+        </div>
+    </div>
+</form>
+<div id="fade" class="black_overlay">
+</div>
+
 </body>
 </html>

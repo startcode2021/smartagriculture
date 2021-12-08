@@ -33,8 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          */
         http.authorizeRequests()
                 .antMatchers("/register","/login","/toLogin","/kaptcha.jpg","/kaptcha","/havephone","/toLoginfail").permitAll()
+                .antMatchers("/js/**","/css/**","/images/*","/fonts/**","/**/*.png","/**/*.jpg").permitAll()
                 .antMatchers("/*").authenticated()
-                .antMatchers("/js/**","/css/**","/images/*","/fonts/**","/**/*.png","/**/*.jpg").permitAll();
+                .antMatchers("/*/*").authenticated()
+                .antMatchers("/*/*/*").authenticated();
 
         // 登录配置
         http.formLogin()

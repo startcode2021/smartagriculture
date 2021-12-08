@@ -20,6 +20,8 @@ import java.util.Date;
 @ApiModel(value="robot_type对象", description="")
 public class RobotType implements Serializable {
 
+    @ApiModelProperty(value = "主键")
+    private int id;
 
     @ApiModelProperty(value = "设备序列号")
     private int index_num;
@@ -37,7 +39,7 @@ public class RobotType implements Serializable {
     private int robot_num;
 
     @ApiModelProperty(value = "添加日期")
-    private DateTime add_date;
+    private Date add_date;
 
     @ApiModelProperty(value = "备注")
     private String other;

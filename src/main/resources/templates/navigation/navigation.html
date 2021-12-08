@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet"  href="css/bootstrap.min.css" />
-<link rel="stylesheet"  href="css/bootstrap-theme.min.css" />
-<script src="js/bootstrap.min.js" type="application/javascript"></script>
-<script src="js/jquery-3.5.1.min.js" type="application/javascript"></script>
+
 <div th:fragment="navigation">
     <nav class="navbar navbar-default" style="margin-bottom : 30px" >
         <div class="container-fluid">
@@ -12,12 +9,12 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">农田检测平台</span>
                 </button>
-                <a class="navbar-brand" href="#">农田检测平台</a>
+                <a class="navbar-brand" href="#" style="padding-left: 25px">农田检测平台</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left" >
                     <li id="li1"><a th:href="@{/index}">数据中心</a></li>
-                    <li id="li2"><a th:href="@{/intelligent/page=1/limit=5}">智能控制</a></li>
+                    <li id="li2"><a th:href="@{/intelligent/1/5}">智能控制</a></li>
                     <li id="li3"><a href="">视频监控</a></li>
                     <li id="li4"><a href="">病虫害防控</a></li>
                     <li id="li5"><a href="">专家问诊</a></li>
@@ -25,7 +22,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a id="a1">你好,</a></li>
+                    <li><a id="a1" th:text="'欢迎,'+${session.loginUser.getName()}"></a></li>
                     <li><a id="a2" th:href="@{/logout}">退出登录</a></li>
                 </ul>
             </div>

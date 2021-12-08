@@ -24,14 +24,6 @@ public class IndexController {
     public String index(){
         return "index";
     }
-    @RequestMapping("/getName")
-    @ResponseBody
-    public String getName() {
-        //通过request来获取保存在session中的用户名
-        User user = (User)request.getSession().getAttribute("loginUser");
-        System.out.println(user.getName());
-        return user.getName();
-    }
     @RequestMapping("/logout")
     public String logout(HttpSession session, SessionStatus sessionStatus){
         session.invalidate();
