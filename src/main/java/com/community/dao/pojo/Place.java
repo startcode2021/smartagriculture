@@ -28,4 +28,24 @@ public class Place {
 
     @ApiModelProperty(value = "纬度")
     private String lat;
+
+    @ApiModelProperty(value = "空气温度")
+    private Double air_temp;
+
+    @ApiModelProperty(value = "空气湿度")
+    private Double air_hump;
+
+    @ApiModelProperty(value = "土壤温度")
+    private Double ground_temp;
+
+    @ApiModelProperty(value = "土壤湿度")
+    private Double ground_hump;
+
+    @ApiModelProperty(value = "光照度")
+    private Double lux;
+
+    @ApiModelProperty(value = "降雨量值")
+    private Double rain;
+
+
 }
