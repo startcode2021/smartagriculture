@@ -13,14 +13,19 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left" >
-                    <li id="li1"><a th:href="@{/index/0}">数据中心</a></li>
+                    <li id="li1" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">数据中心 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/index/0}">当前数据</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/index/table/1/10/0}">表格历史数据</a></li>
+                        </ul>
+                    </li>
                     <li id="li2"><a th:href="@{/intelligent/1/5/0}">智能控制</a></li>
-                    <li id="li3"><a href="">视频监控</a></li>
+                    <li id="li3"><a th:href="@{/index/0}">视频监控</a></li>
                     <li id="li4"><a th:href="@{/ill/1/5/0}">病虫害防控</a></li>
-                    <li id="li5"><a href="">专家问诊</a></li>
-                    <li id="li6"><a th:href="@{/region/1/5}">地域管理</a></li>
+                    <li id="li5"><a th:href="@{/region/1/5}">地域管理</a></li>
                 </ul>
-
                 <ul class="nav navbar-nav navbar-right">
                     <li><a id="a1" th:text="'欢迎,'+${session.loginUser.getName()}"></a></li>
                     <li><a id="a2" th:href="@{/logout}">退出登录</a></li>

@@ -37,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/*").authenticated()
                 .antMatchers("/*/*").authenticated()
                 .antMatchers("/*/*/*").authenticated()
-                .antMatchers("/*/*/*/*").authenticated();
+                .antMatchers("/*/*/*/*").authenticated()
+                .antMatchers("/*/*/*/*/*").authenticated();
 
         // 登录配置
         http.formLogin()
@@ -45,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .loginPage("/toLogin")
                 .loginProcessingUrl("/login") // 登陆表单提交请求
-                .defaultSuccessUrl("/index")// 设置默认登录成功后跳转的页面
+                .successForwardUrl("/index/0")// 设置默认登录成功后跳转的页面
                 .failureUrl("/toLoginfail");
 
         // 注销配置

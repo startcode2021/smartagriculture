@@ -44,8 +44,21 @@ public class Place {
     @ApiModelProperty(value = "光照度")
     private Double lux;
 
-    @ApiModelProperty(value = "降雨量值")
-    private Double rain;
+    @ApiModelProperty(value = "光照开关")
+    private int lighting;
 
+    @ApiModelProperty(value = "风扇开关")
+    private int fan;
 
+    @ApiModelProperty(value = "水闸开关")
+    private int water_valve;
+
+    @ApiModelProperty(value = "二氧化碳浓度")
+    private int co2;
+
+    @ApiModelProperty(value = "氨气浓度")
+    private int nh3;
+
+    @ApiModelProperty(value = "硫化氢浓度")
+    private int h2s;
 }
