@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,6 +33,7 @@ public class IndexController {
     @Autowired
     RobotRecordService robotRecordService;
 
+    /*
     @RequestMapping("/index/{place}")
     public String index(@PathVariable String place,Model model){
         List<Place> placeList = placeService.list();
@@ -43,6 +45,65 @@ public class IndexController {
             Place place1 = placeService.getOne(new QueryWrapper<Place>().eq("place_name",place));
             model.addAttribute("selectPlace",place1);
         }
+        return "index";
+    }*/
+    @RequestMapping("/index/{place}/{index}")
+    public String index(@PathVariable String place,@PathVariable String index,Model model){
+        List<Place> placeList = placeService.list();
+        model.addAttribute("PlaceList",placeList);
+        if(place.equals("0"))
+        {
+            model.addAttribute("selectPlace",placeList.get(0));
+        }else{
+            Place place1 = placeService.getOne(new QueryWrapper<Place>().eq("place_name",place));
+            model.addAttribute("selectPlace",place1);
+        }
+        Place choose = (Place) model.getAttribute("selectPlace");
+        //取20条传感器记录
+        Page<RobotRecord> pageParam = new Page<>(1, 20);
+
+        if(index.equals("0"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("air_temp",0).orderByDesc("add_time"));
+        else if(index.equals("1"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("air_hump",0).orderByDesc("add_time"));
+        else if(index.equals("2"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("ground_temp",0).orderByDesc("add_time"));
+        else if(index.equals("3"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("ground_hump",0).orderByDesc("add_time"));
+        else if(index.equals("4"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("lux",0).orderByDesc("add_time"));
+        else if(index.equals("5"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("co2",0).orderByDesc("add_time"));
+        else if(index.equals("6"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("nh3",0).orderByDesc("add_time"));
+        else if(index.equals("7"))
+            robotRecordService.page(pageParam ,new QueryWrapper<RobotRecord>().eq("region",choose.getPlace_name()).notIn("h2s",0).orderByDesc("add_time"));
+        List<RobotRecord> RobotRecordList = pageParam.getRecords();
+        List<String> time = new ArrayList<String>();
+        List<Double> records = new ArrayList<Double>();
+        for(int i = RobotRecordList.size()-1;i >= 0;i--)
+        {
+            time.add(RobotRecordList.get(i).getAdd_time());
+            if(index.equals("0"))
+                records.add(RobotRecordList.get(i).getAir_temp());
+            else if(index.equals("1"))
+                records.add(RobotRecordList.get(i).getAir_hump());
+            else if(index.equals("2"))
+                records.add(RobotRecordList.get(i).getGround_temp());
+            else if(index.equals("3"))
+                records.add(RobotRecordList.get(i).getGround_hump());
+            else if(index.equals("4"))
+                records.add(RobotRecordList.get(i).getLux());
+            else if(index.equals("5"))
+                records.add(RobotRecordList.get(i).getCo2());
+            else if(index.equals("6"))
+                records.add(RobotRecordList.get(i).getNh3());
+            else if(index.equals("7"))
+                records.add(RobotRecordList.get(i).getH2s());
+        }
+        model.addAttribute("chart",index);
+        model.addAttribute("time_x",time);
+        model.addAttribute("record_y",records);
         return "index";
     }
     @RequestMapping("/index/table/{page}/{limit}/{place}")

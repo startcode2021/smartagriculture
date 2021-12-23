@@ -45,7 +45,9 @@
 .fontcenter{
     text-align: center;
 }
-
+a:hover {
+    text-decoration: none;
+}
 
 .switch {
     width: 50px;
@@ -95,5 +97,6 @@
 .switch.switch-anim:checked:before {
     transition: left 0.3s;
 }
+
 
 

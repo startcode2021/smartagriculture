@@ -22,6 +22,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
+    private int day = 60*60*24;
+
     @Autowired
     UserService userService;
     @Autowired
@@ -35,11 +37,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 通过手机号查询用户
         User user = userService.getOne(new QueryWrapper<User>().eq("phone", s));
 
-        // 放入session
+        // 放入session,设置有效时间一天
+        session.setMaxInactiveInterval(day);
         session.setAttribute("loginUser",user);
 
+
         //创建一个新的UserDetails对象，最后验证登陆的需要
-        UserDetails userDetails=null;
+        UserDetails userDetails = null;
         if(user!=null){
             //System.out.println("未加密："+user.getPassword());
             //String BCryptPassword = new BCryptPasswordEncoder().encode(user.getPassword());

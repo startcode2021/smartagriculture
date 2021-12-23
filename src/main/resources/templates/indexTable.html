@@ -63,6 +63,27 @@
             <td  th:text="${RobotRecord.getAdd_time()}"></td>
         </tr>
     </table>
+    <button type="button" class="btn btn-success">显示变化折线图</button>
+    <!--分页-->
+    <nav aria-label="Page navigation" class="navbar-right" >
+        <ul class="pagination" style="margin-top: 0">
+            <li class="page-item">
+                <a th:class="${pageParam.hasPrevious()==true?'btn page-link':'btn page-link disabled'}" th:href="@{'/index/table/'+${pageParam.getCurrent()-1}+'/10/'+${CurrentPlace}}" tabindex=""><span aria-hidden="true">&laquo;</span></a>
+            </li>
+            <li class="page-item" th:if="${pageParam.hasPrevious()}">
+                <a class="page-link" th:href="@{'/index/table/'+${pageParam.getCurrent()-1}+'/10/'+${CurrentPlace}}" th:text="${pageParam.getCurrent()-1}"></a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" th:href="@{'/index/table/'+${pageParam.getCurrent()}+'/10/'+${CurrentPlace}}" th:text="${pageParam.getCurrent()}"></a>
+            </li>
+            <li class="page-item" th:if="${pageParam.hasNext()}">
+                <a class="page-link" th:href="@{'/index/table/'+${pageParam.getCurrent()+1}+'/10/'+${CurrentPlace}}" th:text="${pageParam.getCurrent()+1}"></a>
+            </li>
+            <li class="page-item">
+                <a th:class="${pageParam.hasNext()==true?'btn page-link':'btn page-link disabled'}"  th:href="@{'/index/table/'+${pageParam.getCurrent()+1}+'/10/'+${CurrentPlace}}" ><span aria-hidden="true">&raquo;</span></a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 </body>

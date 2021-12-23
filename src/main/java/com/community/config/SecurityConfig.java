@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .loginPage("/toLogin")
                 .loginProcessingUrl("/login") // 登陆表单提交请求
-                .successForwardUrl("/index/0")// 设置默认登录成功后跳转的页面
+                .successForwardUrl("/index/0/0")// 设置默认登录成功后跳转的页面
                 .failureUrl("/toLoginfail");
 
         // 注销配置
