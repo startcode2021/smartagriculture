@@ -23,7 +23,11 @@
         <th>序号</th>
         <th>标题</th>
         <th>添加时间</th>
-
+        <tr th:each="journal:${Journals}">
+            <td th:text="${Journals.indexOf(journal)+1+5*(pageParam.getCurrent()-1)}"></td>
+            <td th:text="${journal.getTitle()}"></td>
+            <td th:text="${journal.getAdd_time()}"></td>
+        </tr>
     </table>
 </div>
 <form th:action="@{/AddJournal}" method="post" id="light"  class="form-horizontal journal_content" style="overflow-x:hidden">
