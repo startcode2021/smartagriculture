@@ -29,27 +29,27 @@
             </th:block>
         </ul>
     </div>
-<table  class="table table-hover">
-    <!-- On cells (`td` or `th`) -->
-    <th>序号</th>
-    <th>设备序列号</th>
-    <th>设备名称</th>
-    <th>设备类型</th>
-    <th>安装区域</th>
-    <th>设备数量</th>
-    <th>添加日期</th>
-    <th>备注</th>
-    <tr th:each="RobotyType:${RobotTypeList}">
-        <td  th:text="${RobotTypeList.indexOf(RobotyType)+1+5*(pageParam.getCurrent()-1)}"></td>
-        <td  th:text="${RobotyType.getIndex_num()}"></td>
-        <td  th:text="${RobotyType.getRobot_name()}"></td>
-        <td  th:text="${RobotyType.getRobot_type()}"></td>
-        <td  th:text="${RobotyType.getRobot_address()}"></td>
-        <td  th:text="${RobotyType.getRobot_num()}"></td>
-        <td  th:text="${#dates.format(RobotyType.getAdd_date(),'yyyy-MM-dd')}"></td>
-        <td  th:text="${RobotyType.getOther()}"></td>
-    </tr>
-</table>
+    <table  class="table table-hover">
+        <!-- On cells (`td` or `th`) -->
+        <th>序号</th>
+        <th>设备序列号</th>
+        <th>设备名称</th>
+        <th>设备类型</th>
+        <th>安装区域</th>
+        <th>设备数量</th>
+        <th>添加日期</th>
+        <th>备注</th>
+        <tr th:each="RobotyType:${RobotTypeList}">
+            <td  th:text="${RobotTypeList.indexOf(RobotyType)+1+5*(pageParam.getCurrent()-1)}"></td>
+            <td  th:text="${RobotyType.getIndex_num()}"></td>
+            <td  th:text="${RobotyType.getRobot_name()}"></td>
+            <td  th:text="${RobotyType.getRobot_type()}"></td>
+            <td  th:text="${RobotyType.getRobot_address()}"></td>
+            <td  th:text="${RobotyType.getRobot_num()}"></td>
+            <td  th:text="${#dates.format(RobotyType.getAdd_date(),'yyyy-MM-dd')}"></td>
+            <td  th:text="${RobotyType.getOther()}"></td>
+        </tr>
+    </table>
     <button type="button" class="btn btn-success" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">添加设备</button>
     <button type="button" class="btn btn-danger"  onclick = "document.getElementById('light2').style.display='block';document.getElementById('fade').style.display='block'">删除设备</button>
     <!--分页-->

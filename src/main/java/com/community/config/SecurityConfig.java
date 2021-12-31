@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          * 访问权限，添加之后的都可以访问否则会被拦截
          */
         http.authorizeRequests()
-                .antMatchers("/register","/login","/toLogin","/kaptcha.jpg","/kaptcha","/havephone","/toLoginfail").permitAll()
+                .antMatchers("/register","/login","/toLogin","/kaptcha.jpg","/kaptcha","/havephone","/toLoginfail","/Demo").permitAll()
                 .antMatchers("/js/**","/css/**","/images/*","/fonts/**","/**/*.png","/**/*.jpg").permitAll()
                 .antMatchers("/*").authenticated()
                 .antMatchers("/*/*").authenticated()
