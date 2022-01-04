@@ -11,7 +11,6 @@ function Openordown(temp,obj) {
             }
         },
         error:function(){
-
         }
     });
 }
