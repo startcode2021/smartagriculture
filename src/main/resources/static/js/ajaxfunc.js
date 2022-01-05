@@ -20,11 +20,9 @@ function ViewContent(id) {
     $.ajax({
         url:"/ViewContent",
         data:{"id":id},
-        type:"post",
-        success:function(msg){
-            if(msg.code==100){
-            }else{
-            }
+        type:"get",
+        success:function(data){
+            window.location.href = data;
         },
         error:function(){
         }

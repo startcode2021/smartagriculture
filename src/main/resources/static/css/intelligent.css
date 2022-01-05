@@ -6,6 +6,10 @@
     border-radius: 25px;
     padding: 20px 50px;
 }
+.Journal_title{
+    text-align: center;
+    font-size:24px;
+}
 #RichText{
     width: 90%;
     margin: 0% auto 0;

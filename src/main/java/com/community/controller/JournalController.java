@@ -35,6 +35,12 @@ public class JournalController {
         model.addAttribute("pageParam",pageParam);
         return "journal/journal";
     }
+    @GetMapping("/journal/journalcontent/{id}")
+    public String content(@PathVariable int id,Model model){
+       Journal journal = journalService.getOne(new QueryWrapper<Journal>().eq("id",id));
+       model.addAttribute("CurrentJournal",journal);
+       return "journal/journalcontent";
+    }
     @PostMapping("/AddJournal")
     public String AddJournal(String title, String Content)
     {
@@ -58,8 +64,10 @@ public class JournalController {
             return Msg.error();
         }
     }
-    @PostMapping("/ViewContent")
+    @GetMapping("/ViewContent")
+    @ResponseBody
     public String ViewContent(int id){
-        return "journal/journalcontent";
+        String data = "/journal/journalcontent/"+id;
+        return data;
     }
 }
