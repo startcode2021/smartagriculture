@@ -6,18 +6,14 @@ import com.community.dao.pojo.Place;
 import com.community.dao.pojo.RobotType;
 import com.community.service.PlaceService;
 import com.community.service.RobotTypeService;
-import com.community.vo.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.context.annotation.Bean;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -45,7 +41,7 @@ public class IntelligentController {
         }
         List<RobotType> RobotTypeList = pageParam.getRecords();
         List<Place> placeList = placeService.list();
-        model.addAttribute("PlaceList",placeList);
+        model.addAttribute("PlaceList", placeList);
         model.addAttribute("RobotTypeList",RobotTypeList);
         model.addAttribute("pageParam",pageParam);
         model.addAttribute("CurrentPlace",place);

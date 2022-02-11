@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.community.dao.pojo.Place;
 import com.community.dao.pojo.RobotRecord;
-import com.community.dao.pojo.RobotType;
 import com.community.service.PlaceService;
 import com.community.service.RobotRecordService;
 import com.community.vo.Msg;
@@ -37,7 +36,6 @@ public class IndexController {
 
     @Autowired
     RobotRecordService robotRecordService;
-
     /*
     @RequestMapping("/index/{place}")
     public String index(@PathVariable String place,Model model){
@@ -55,13 +53,13 @@ public class IndexController {
     @RequestMapping("/index/{place}/{index}")
     public String index(@PathVariable String place,@PathVariable String index,Model model){
         List<Place> placeList = placeService.list();
-        model.addAttribute("PlaceList",placeList);
+        model.addAttribute("PlaceList", placeList);
         if(place.equals("0"))
         {
-            model.addAttribute("selectPlace",placeList.get(0));
+            model.addAttribute("selectPlace", placeList.get(0));
         }else{
             Place place1 = placeService.getOne(new QueryWrapper<Place>().eq("place_name",place));
-            model.addAttribute("selectPlace",place1);
+            model.addAttribute("selectPlace", place1);
         }
         Place choose = (Place) model.getAttribute("selectPlace");
         //取20条传感器记录
@@ -124,7 +122,7 @@ public class IndexController {
         }
         List<RobotRecord> RobotRecordList = pageParam.getRecords();
         List<Place> placeList = placeService.list();
-        model.addAttribute("PlaceList",placeList);
+        model.addAttribute("PlaceList", placeList);
         model.addAttribute("RobotRecordList",RobotRecordList);
         model.addAttribute("pageParam",pageParam);
         model.addAttribute("CurrentPlace",place);

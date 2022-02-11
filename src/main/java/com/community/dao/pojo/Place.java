@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("place")
+@TableName("Place")
 @ApiModel(value="Place对象", description="")
 public class Place {
 

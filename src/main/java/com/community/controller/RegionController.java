@@ -3,9 +3,7 @@ package com.community.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.community.dao.pojo.Place;
-import com.community.dao.pojo.RobotType;
 import com.community.service.PlaceService;
-import com.community.service.RobotTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,8 +29,8 @@ public class RegionController {
         }
         Page<Place> pageParam = new Page<>(page, limit);
         placeService.page(pageParam,new QueryWrapper<Place>().orderByDesc("id"));
-        List<Place> PlaceList = pageParam.getRecords();
-        model.addAttribute("PlaceList",PlaceList);
+        List<Place> placeList = pageParam.getRecords();
+        model.addAttribute("PlaceList", placeList);
         model.addAttribute("pageParam",pageParam);
         return "region/region";
     }
@@ -56,8 +53,8 @@ public class RegionController {
     @PostMapping("/DeletePlace")
     public void DeleteRobotType(String id, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
-        List<Place> PlaceList = placeService.list(new QueryWrapper<Place>().orderByDesc("id"));
-        if(PlaceList.size()<Integer.parseInt(id))
+        List<Place> placeList = placeService.list(new QueryWrapper<Place>().orderByDesc("id"));
+        if(placeList.size()<Integer.parseInt(id))
         {
             PrintWriter writer = response.getWriter();
             String msg = null;
@@ -66,7 +63,7 @@ public class RegionController {
             writer.flush();
             writer.close();
         }else {
-            Place obj = PlaceList.get(Integer.parseInt(id) - 1);
+            Place obj = placeList.get(Integer.parseInt(id) - 1);
             boolean flag = placeService.remove(new QueryWrapper<Place>().eq("id", obj.getId()));
             if (flag) {
                 PrintWriter writer = response.getWriter();

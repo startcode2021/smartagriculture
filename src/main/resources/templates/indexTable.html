@@ -27,7 +27,7 @@
         </button>
         <ul class="dropdown-menu"  >
             <li><a href="/index/table/1/10/0">全部</a></li>
-            <th:block th:each="Place:${PlaceList}">
+            <th:block th:each="Place:${placeList}">
                 <li><a th:href="@{'/index/table/1/10/'+${Place.getPlace_name()}}" th:text="${Place.getPlace_name()}"></a></li>
             </th:block>
         </ul>
