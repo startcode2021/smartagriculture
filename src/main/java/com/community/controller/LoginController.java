@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.community.dao.pojo.User;
 import com.community.service.UserService;
 import com.community.vo.Msg;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,18 +21,25 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @ApiOperation(value = "登录页面")
     @GetMapping("/toLogin")
     public String toLogin(){
         return "login";
     }
+
+    @ApiOperation(value = "登录失败跳转")
     @GetMapping("/toLoginfail")
     public String toLoginfail(){
         return "login_fail";
     }
+
+    @ApiOperation(value = "注册页面")
     @GetMapping("/register")
     public String toRegister(){
         return "register";
     }
+
+    @ApiOperation(value = "手机号是否重复")
     @PostMapping("/havephone")
     @ResponseBody
     public Msg Havephone(String phone)
@@ -46,6 +54,8 @@ public class LoginController {
             return Msg.success();
         }
     }
+
+    @ApiOperation(value = "注册表单提交")
     @PostMapping("/register")
     @ResponseBody
     public Msg Register(String name, String password,String phone,String email) {

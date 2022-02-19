@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.community.dao.pojo.Journal;
 import com.community.service.JournalService;
 import com.community.vo.Msg;
+import io.swagger.annotations.ApiOperation;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class JournalController {
     @Autowired
     JournalService journalService;
 
+    @ApiOperation(value = "获取日记列表")
     @GetMapping("/journal/{page}/{limit}")
     public String region(@PathVariable int page, @PathVariable int limit, Model model) {
         if (page < 1){
@@ -35,12 +37,16 @@ public class JournalController {
         model.addAttribute("pageParam",pageParam);
         return "journal/journal";
     }
+
+    @ApiOperation(value = "获取对应日记内容")
     @GetMapping("/journal/journalcontent/{id}")
     public String content(@PathVariable int id,Model model){
        Journal journal = journalService.getOne(new QueryWrapper<Journal>().eq("id",id));
        model.addAttribute("CurrentJournal",journal);
        return "journal/journalcontent";
     }
+
+    @ApiOperation(value = "添加日记")
     @PostMapping("/AddJournal")
     public String AddJournal(String title, String Content)
     {
@@ -52,6 +58,8 @@ public class JournalController {
         boolean flag = journalService.save(journal);
         return "redirect:/journal/1/5";
     }
+
+    @ApiOperation(value = "删除对应日记")
     @PostMapping("/DelJournal")
     @ResponseBody
     public Msg DelJournal(int id)
@@ -64,6 +72,7 @@ public class JournalController {
             return Msg.error();
         }
     }
+
     @GetMapping("/ViewContent")
     @ResponseBody
     public String ViewContent(int id){

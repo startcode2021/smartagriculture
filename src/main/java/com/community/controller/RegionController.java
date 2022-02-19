@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.community.dao.pojo.Place;
 import com.community.service.PlaceService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ public class RegionController {
     @Autowired
     PlaceService placeService;
 
+    @ApiOperation(value = "返回大棚数据")
     @GetMapping("/region/{page}/{limit}")
     public String region(@PathVariable int page, @PathVariable int limit, Model model) {
         if (page < 1){
@@ -34,6 +36,8 @@ public class RegionController {
         model.addAttribute("pageParam",pageParam);
         return "region/region";
     }
+
+    @ApiOperation(value = "添加大棚")
     @PostMapping("/AddPlace")
     public String AddRobotType(String place_name, String gps_name,String lon,String lat){
         Place place = new Place();
@@ -50,6 +54,7 @@ public class RegionController {
         }
     }
 
+    @ApiOperation(value = "删除大棚")
     @PostMapping("/DeletePlace")
     public void DeleteRobotType(String id, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");

@@ -3,10 +3,12 @@ package com.community.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.community.dao.pojo.Place;
-import com.community.dao.pojo.RobotType;
 import com.community.dao.pojo.ill;
 import com.community.service.IllService;
 import com.community.service.PlaceService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -43,12 +44,13 @@ public class IllController {
         }
         List<ill> illList = pageParam.getRecords();
         List<Place> placeList = placeService.list();
-        model.addAttribute("PlaceList",placeList);
+        model.addAttribute("PlaceList", placeList);
         model.addAttribute("illList",illList);
         model.addAttribute("pageParam",pageParam);
         model.addAttribute("CurrentPlace",place);
         return "ill/ill";
     }
+    @ApiOperation(value = "新增虫害")
     @PostMapping("/Addill")
     public String AddRobotType(String ill_name, String robot_name,String region,String robot_num,String operation){
         ill temp = new ill();
@@ -66,6 +68,7 @@ public class IllController {
             return "redirect:/ill/1/5/0";
         }
     }
+    @ApiOperation(value = "删除虫害传感器")
     @PostMapping("/Deleteill/{place}")
     public void DeleteRobotType(String id, @PathVariable String place, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
