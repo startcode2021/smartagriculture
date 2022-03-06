@@ -6,6 +6,7 @@ import com.community.dao.pojo.Place;
 import com.community.service.PlaceService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,6 @@ public class RegionController {
         model.addAttribute("pageParam",pageParam);
         return "region/region";
     }
-
     @ApiOperation(value = "添加大棚")
     @PostMapping("/AddPlace")
     public String AddRobotType(String place_name, String gps_name,String lon,String lat){

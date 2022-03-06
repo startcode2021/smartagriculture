@@ -138,9 +138,54 @@
 <div id="list-box2" class="chart">
 
 </div>
+<div id="row">
+    <div class="col-md-1"></div>
+    <button class="btn btn-warning col-md-1" type="submit" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">设置环境因素阈值</button>
+</div>
+
+<form th:action="@{/addRange}" method="post" id="light"  class="form-horizontal white_content" style="overflow-x:hidden; height: 45%;">
+    <button type="button" class="btn btn-danger col-sm-offset-11 col-sm-1" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">环境因素</label>
+        <select class="form-control-static col-sm-6" name="factor">
+                <option   value="air_temp">空气温度</option>
+                <option   value="air_hump">空气湿度</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-3 control-label">大棚</label>
+        <select class="form-control-static col-sm-6" name="address">
+            <th:block th:each="Place:${PlaceList}">
+                <option  th:text="${Place.getPlace_name()}" th:value="${Place.getPlace_name()}"></option>
+            </th:block>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">上限</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="upper_limit" name="upper_limit"  placeholder="上限">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">下限</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="lower_limit" name="lower_limit"  placeholder="下限">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-offset-1 col-sm-6 control-label">重复设置会覆盖地域原先的阈值</label>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit" class="btn btn-primary">添加阈值</button>
+        </div>
+    </div>
+
+</form>
+<div id="fade" class="black_overlay"></div>>
+
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
-
     var x = '[[${time_x}]]';
     var x_string = x.replace('[','').replace(']','').split(',');
     var myChart = echarts.init(document.getElementById('list-box2'));
