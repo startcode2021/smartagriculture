@@ -1,5 +1,5 @@
 /*
- Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
  Source Server         : 11
  Source Server Type    : MySQL
@@ -11,7 +11,7 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 18/02/2022 15:13:49
+ Date: 10/03/2022 20:53:57
 */
 
 SET NAMES utf8mb4;
@@ -39,12 +39,32 @@ CREATE TABLE `Place`  (
   `nh3` double NOT NULL DEFAULT 0 COMMENT '氨气浓度',
   `h2s` double NOT NULL DEFAULT 0 COMMENT '硫化氢浓度',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of Place
 -- ----------------------------
-INSERT INTO `Place` VALUES (1, '大棚一号', 'gps_1', 25, 55, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0);
+INSERT INTO `Place` VALUES (1, '大棚一号', 'gps_1', 25, 55, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0);
+INSERT INTO `Place` VALUES (7, '大棚二号', 'gps_1', 25, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- ----------------------------
+-- Table structure for environment_range
+-- ----------------------------
+DROP TABLE IF EXISTS `environment_range`;
+CREATE TABLE `environment_range`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `place_id` int(11) NOT NULL,
+  `environment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `upper_limit` double(11, 0) NOT NULL,
+  `lower_limit` double(11, 0) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of environment_range
+-- ----------------------------
+INSERT INTO `environment_range` VALUES (1, 1, 'air_temp', 19, 15);
+INSERT INTO `environment_range` VALUES (3, 7, 'air_temp', 10, 5);
 
 -- ----------------------------
 -- Table structure for ill
@@ -100,7 +120,7 @@ CREATE TABLE `robot_record`  (
   `co2` double NOT NULL DEFAULT 0 COMMENT 'co2浓度',
   `nh3` double NOT NULL DEFAULT 0 COMMENT 'nh3浓度',
   `h2s` double NOT NULL DEFAULT 0 COMMENT 'h2s浓度',
-  `add_time` datetime NOT NULL COMMENT '上传时间',
+  `add_time` datetime(0) NOT NULL COMMENT '上传时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -121,7 +141,7 @@ CREATE TABLE `robot_type`  (
   `robot_type` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '传感器类型',
   `robot_address` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '安装大棚',
   `robot_num` int(11) NOT NULL DEFAULT 0 COMMENT '传感器数量',
-  `add_date` datetime NOT NULL COMMENT '安装时间',
+  `add_date` datetime(0) NOT NULL COMMENT '安装时间',
   `other` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `index_num` int(11) NOT NULL COMMENT '设备序列号',
   PRIMARY KEY (`id`) USING BTREE
@@ -163,11 +183,13 @@ CREATE TABLE `user_role`  (
   `gmtCreate` date NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `user_role_id_uindex`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
+INSERT INTO `user_role` VALUES (1, 'ADMINISTRATOR', '管理员', '2022-02-27');
 INSERT INTO `user_role` VALUES (2, '用户', '普通用户', '2022-02-11');
+INSERT INTO `user_role` VALUES (3, '游客', '游客', '2022-02-27');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -14,11 +14,11 @@ import java.util.List;
 
 @Service
 public class PlaceServiceImpl extends ServiceImpl<PlaceMapper, Place> implements PlaceService {
-    @Autowired
+    /*@Autowired
     private PlaceMapper placeMapper;
 
     @Autowired
-    RedisUtil redis;
+    RedisUtil redis;*/
 
     /*   redis预先加载数据表到内存中
     @PostConstruct
