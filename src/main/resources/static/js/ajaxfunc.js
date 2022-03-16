@@ -46,3 +46,21 @@ function DelUser(id) {
         }
     });
 }
+function ChangeUserRole(id) {
+    $.ajax({
+        url:"/ChangeUserRole",
+        data:{"id":id},
+        type:"post",
+        success:function(msg){
+            if(msg.code==100){
+                alert("---操作成功---");
+                window.location.href = "/background/1/5";
+            }else{
+                alert("---操作失败---");
+                window.location.href = "/background/1/5";
+            }
+        },
+        error:function(){
+        }
+    });
+}

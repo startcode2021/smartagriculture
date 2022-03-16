@@ -29,8 +29,9 @@
             <td  th:text="${userList.indexOf(user)+1+5*(pageParam.getCurrent()-1)}"></td>
             <td  th:text="${user.getName()}"></td>
             <td  th:text="${user.getPhone()}"></td>
-            <td  th:text="${user.getRoleid()}"></td>
+            <td  th:text="${roleList.get(userList.indexOf(user))}"></td>
             <td>
+                <button th:onclick="ChangeUserRole([[${user.getId()}]])" class="btn">更改用户权限</button>
                 <button th:onclick="DelUser([[${user.getId()}]])" class="btn">注销用户</button>
             </td>
         </tr>

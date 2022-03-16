@@ -72,9 +72,10 @@ public class LoginController {
             user.setPassword(new BCryptPasswordEncoder().encode(password));
             user.setEmail(email);
             user.setPhone(phone);
-            //1超级管理员:直接修改数据库的用户，只能打开mySQL改的
-            //2普通会员:通过请求注册的用户
-            user.setRoleid(2);
+            //1管理员:直接修改数据库的用户，只能打开mySQL改的
+            //2普通会员:管理员对游客进行升级
+            //3游客:刚注册的用户
+            user.setRoleid(3);
             boolean flag = userService.save(user);
             if (flag) {
                 return Msg.success();
@@ -83,5 +84,4 @@ public class LoginController {
             }
         }
     }
-
 }

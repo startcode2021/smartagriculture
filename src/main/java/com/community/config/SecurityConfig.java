@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/register","/login","/toLogin","/kaptcha.jpg","/kaptcha","/havephone","/toLoginfail","/Demo").permitAll()
                 .antMatchers("/js/**","/css/**","/images/*","/fonts/**","/**/*.png","/**/*.jpg").permitAll()
+                .antMatchers("/addRange","/Addill","/Deleteill/**","/kaiguang","/AddRobotType","/DeleteRobotType/**","/DelJournal","/AddPlace","/DeletePlace").hasAnyRole("administrator","users")
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/*").authenticated()
